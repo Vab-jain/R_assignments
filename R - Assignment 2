@@ -1,0 +1,108 @@
+###################################
+###		R LAB ASSIGNMENT		###
+###		By: Vaibhav Jain		###
+###################################
+
+###	Excercise-1: Geometrical Distribution
+
+# Probability of Success
+p = 0.2
+
+# Number of experiments
+n = 1000
+
+# generating n random numbers
+grand = rgeom(n,p)
+ghist = hist(grand, plot = F, breaks = c(0:max(grand))) 
+
+# Finding the relative frequencies
+ghist$counts = ghist$counts/sum(ghist$counts) 
+
+# Defining discrete data points
+x = 0:max(grand) 
+
+# Finding the probability density function of the geometric distribution
+gpdf = p*(1-p)^x 
+
+
+png(file = "geo_Distribution.png") 
+
+# Plotting the histogram on relative frequencies
+plot(ghist, freq = TRUE, col="red",1 ylim = c(0,1)) 
+
+# Superimposing the probability density function of the geometric distribution
+lines(x,gpdf) 
+
+dev.off() 
+
+
+###	Excercise-2: Poisson Distribution
+
+# Average number of success per unit time
+lambda = 4
+
+# Number of experiments
+n = 1000
+
+# Data of number of visitors to a shop in unit time intervals
+# by generating 50 random numbers
+pd = rpois(n,lambda)
+pdhist = hist(pd, plot = F, breaks = c(0:max(pd)))
+
+# Finding the relative frequencies
+pdhist$counts = pdhist$counts/sum(pdhist$counts)
+
+# Defining discrete data points
+x = 0:max(pd)
+
+# Finding the probability density function of the poisson distribution
+ppdf = exp(-lambda)*(lambda^x)/factorial(x)
+
+# Creating the file
+png(file = "poisson_Distribution.png")
+
+# Plotting the histogram on relative frequencies
+plot(pdhist, freq = TRUE, ylim = c(0,0.3), col = "grey", main = "histogram of poisson
+distribution")
+
+# Superimposing the probability mass function of the poisson distribution
+lines(x,ppdf)
+dev.off()
+
+
+
+###	Experiment-3: Binomial Distribution
+
+# Number to trials
+n = 1000
+
+# Probability of success
+p = 0.5
+
+# Number of coins tossed per trial
+t = 10
+
+# Conducting the experiment of tossing the coin 10 times each for 50 times
+# by generating 50 numbers in the
+bd = rbinom(n,t,p)
+bdhist = hist(bd,plot = F, breaks = c(0:10))
+
+# Finding the relative frequencies
+bdhist$counts = bdhist$counts/sum(bdhist$counts)
+
+# Defining discrete data points
+x = 0:10
+
+# Finding the probability density function of the binomial distribution
+bpdf = choose(t,x)*(p^x)*(1-p)^(t-x)
+
+# Creating the file
+png(file = "binom_Distribution.png")
+
+# Plotting the histogram on relative frequencies
+plot(bdhist, freq = TRUE, ylim = c(0,0.4), col = "blue", main = "histogram of
+binomial distribution")
+
+# Superimposing the probability mass function of the binomial distribution
+lines(x,bpdf)
+dev.off() 
